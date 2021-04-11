@@ -1,7 +1,7 @@
 
 // import { createApp } from 'vue'
 import InputForm from './js/components/InputForm.js'
-import OutputList from './js/components/OutputList.vue'
+import OutputList from './js/components/OutputList.js'
 import style from './sass/style.scss'
 
 window.vue = {

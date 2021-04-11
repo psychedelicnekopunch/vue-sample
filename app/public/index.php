@@ -8,30 +8,32 @@
 	<body>
 		<script type="text/javascript" src="/js/bundle.js?<?php echo time() ?>"></script>
 		<script type="text/javascript" src="https://unpkg.com/vue@next"></script>
-		<h1>hello world</h1>
-		<p>vue-sample/nginx</p>
+		<h1>vue-sample</h1>
 		<div id="app">
-			<output-list></output-list>
-			<input-form></input-form>
-			<hr>
-			<form>
-				{{ test }}<br>
-				<input type="text" name="" v-model="test">
-				<button v-on:click.prevent="send" type="submit">button</button>
-			</form>
+			<output-list v-on:did-click="didClick2" v-on:did-init="didInit"></output-list>
+			<input-form v-on:did-click="didClick"></input-form>
 		</div>
 		<script type="text/javascript">
-			console.log(window.vue)
-
+			// console.log(window.vue)
 			const app = Vue.createApp({
 				data: function() {
 					return {
-						test: '',
+						outputList: null,
+						test: [1, 2, 3],
 					}
 				},
 				methods: {
-					send() {
-						console.log(this.test)
+					didClick(e) {
+						// console.log('did click')
+						// console.log(e)
+						this.outputList.addItem(e)
+					},
+					didClick2(e) {
+						console.log('did click 2')
+					},
+					didInit(e) {
+						console.log('didInit')
+						this.outputList = e
 					},
 				},
 			})
@@ -39,17 +41,8 @@
 			app.component('input-form', window.vue.components.InputForm)
 			app.component('output-list', window.vue.components.OutputList)
 			app.mount('#app')
+
+			console.log(app)
 		</script>
-		<!-- <div id="app2">
-			<output-list></output-list>
-			<input-form></input-form>
-			<hr>
-			<form>
-				{{ test }}<br>
-				<input type="text" name="" v-model="test">
-				<button v-on:click.prevent="send" type="submit">button</button>
-			</form>
-		</div>
-		<script type="text/javascript" src="/js/bundle.js?<?php echo time() ?>"></script> -->
 	</body>
 </html>
